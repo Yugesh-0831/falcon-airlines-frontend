@@ -12,6 +12,8 @@ import { fetchAllFlightsAsync } from "./features/flight/flightSlice";
 import Flights from "./pages/Flights";
 import ProtectedAdmin from "./features/auth/ProtectedAdmin";
 import AdminFlights from "./pages/AdminFlights";
+import { io } from "socket.io-client";
+const socket = io.connect("http://localhost:8080");
 
 const router = createBrowserRouter([
   {
@@ -52,18 +54,13 @@ function App() {
       dispatch(fetchLoggedInUserAsync(user._id));
       dispatch(fetchAllFlightsAsync());
     }
-
-    // const ws = new WebSocket("ws://localhost:8080");
-    // ws.onmessage = (event) => {
-    //   const message = JSON.parse(event.data);
-    //   if (message.type === "FLIGHT_UPDATED") {
-    //     dispatch(fetchAllFlightsAsync());
-    //   }
-    // };
-    // return () => {
-    //   ws.close();
-    // };
   }, [dispatch, user]);
+
+  useEffect(() => {
+    socket.on("flight_updated", (data) => {
+      dispatch(fetchAllFlightsAsync());
+    });
+  }, [socket]);
 
   return (
     <>
