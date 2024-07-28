@@ -13,9 +13,6 @@ import Navbar from "./Navbar";
 function AdminFlights() {
   const dispatch = useDispatch();
   const flights = useSelector(selectAllFlights);
-  useEffect(() => {
-    dispatch(fetchAllFlightsAsync());
-  }, [dispatch, flights]);
   const {
     register,
     handleSubmit,
@@ -121,6 +118,7 @@ function AdminFlights() {
                       updatedFlight.scheduled_arrival = data.scheduled_arrival;
                       updatedFlight.scheduled_departure =
                         data.scheduled_departure;
+                      updatedFlight.status = data.status;
                       updatedFlight.updates.push({ message: data.message });
                       updatedFlight.message = data.message;
                       console.log("updated flight :", updatedFlight);

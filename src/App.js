@@ -4,7 +4,7 @@ import UserFlights from "./pages/UserFlights";
 import Login from "./features/auth/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLoggedInUser } from "./features/auth/authSlice";
+import { selectLoggedInUser, setLoggedInUser } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 import Protected from "./features/auth/Protected";
@@ -48,19 +48,29 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
+
+  // For Login Percistence ------>
+  // useEffect(() => {
+  //   const storedUser = window.localStorage.getItem("USER");
+  //   if (storedUser) {
+  //     const parsedUser = JSON.parse(storedUser);
+  //     dispatch(setLoggedInUser(parsedUser));
+  //     console.log("parsedUser: ", parsedUser);
+  //   }
+  // }, []);
+
   const user = useSelector(selectLoggedInUser);
   useEffect(() => {
     if (user) {
       dispatch(fetchLoggedInUserAsync(user._id));
       dispatch(fetchAllFlightsAsync());
+      window.localStorage.setItem("USER", JSON.stringify(user));
     }
   }, [dispatch, user]);
 
-  useEffect(() => {
-    socket.on("flight_updated", (data) => {
-      dispatch(fetchAllFlightsAsync());
-    });
-  }, [socket]);
+  socket.on("flight_updated", (data) => {
+    dispatch(fetchAllFlightsAsync());
+  });
 
   return (
     <>
