@@ -1,9 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectUserInfo } from "../features/user/userSlice";
+import { setLoggedInUser } from "../features/auth/authSlice";
 
 function Navbar() {
   const user = useSelector(selectUserInfo);
+  const dispatch = useDispatch();
+  const handleSignOut = () => {
+    window.localStorage.removeItem("USER");
+    dispatch(setLoggedInUser(null));
+  };
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -26,6 +32,15 @@ function Navbar() {
                   </Link>
                 </li>
               ) : null}
+              <li>
+                <div
+                  onClick={handleSignOut}
+                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent"
+                  aria-current="page"
+                >
+                  Sign Out
+                </div>
+              </li>
             </ul>
           </div>
         </div>

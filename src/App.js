@@ -13,6 +13,7 @@ import Flights from "./pages/Flights";
 import ProtectedAdmin from "./features/auth/ProtectedAdmin";
 import AdminFlights from "./pages/AdminFlights";
 import { io } from "socket.io-client";
+import SignUp from "./features/auth/SignUp";
 const socket = io.connect("http://localhost:8080");
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/signup",
+    element: <SignUp></SignUp>,
   },
   {
     path: "/my-flights",
