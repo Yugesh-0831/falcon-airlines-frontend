@@ -5,7 +5,8 @@ import {
   createUserAsync,
   selectLoggedInUser,
 } from "./authSlice";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { SiIndigo } from "react-icons/si";
 
 function SignUp() {
   const {
@@ -19,9 +20,18 @@ function SignUp() {
   return (
     <>
       {user && <Navigate to="/" replace={true}></Navigate>}
-      <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+      <div
+        className="min-h-screen bg-cover bg-no-repeat bg-gray-100 flex flex-col justify-center sm:py-12"
+        style={{
+          backgroundImage:
+            "url('https://media.istockphoto.com/id/656116970/photo/blue-background.jpg?s=612x612&w=0&k=20&c=P7PWU0yK1Vc5y-0eexb96dCTSa7JS3fCKieY2G0dh9w=')",
+        }}
+      >
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <h1 className="font-bold text-center text-2xl mb-5">Indigo SignUp</h1>
+          <div className="flex items-center justify-center m-4">
+            <SiIndigo className="text-blue-800 font-bold text-4xl m-4" />
+            <h1 className="font-bold text-2xl">Indigo</h1>
+          </div>
           <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             <form
               className="px-5 py-7"
@@ -55,7 +65,7 @@ function SignUp() {
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               />
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                Password
+                Confirm Password
               </label>
               <input
                 type="text"
@@ -72,10 +82,19 @@ function SignUp() {
               />
               <button
                 type="submit"
-                className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+                className="transition duration-200 bg-blue-500 hover:bg-blue-800 focus:bg-blue-800 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
               >
                 <span className="inline-block mr-2">SignUp</span>
               </button>
+              <p className="mt-10 text-center text-sm text-gray-500">
+                Already a member?{" "}
+                <Link
+                  to="/login"
+                  className="font-semibold leading-6 text-blue-500 hover:text-blue-800"
+                >
+                  Login
+                </Link>
+              </p>
             </form>
           </div>
         </div>

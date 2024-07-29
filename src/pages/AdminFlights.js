@@ -9,6 +9,10 @@ import {
   updateFlightScheduleAsync,
 } from "../features/flight/flightSlice";
 import Navbar from "./Navbar";
+import { IoAirplaneSharp } from "react-icons/io5";
+import { HiArrowLongRight } from "react-icons/hi2";
+import { SiIndigo } from "react-icons/si";
+import { IoMdCheckmark } from "react-icons/io";
 
 function AdminFlights() {
   const dispatch = useDispatch();
@@ -47,19 +51,22 @@ function AdminFlights() {
     <>
       <Navbar />
       <div>
-        <ul role="list" className="divide-y">
+        <ul role="list">
           {flights.map((flight) => (
-            <div className="m-5">
-              <div className="bg-gray-100 rounded-lg p-3">
+            <div className="m-5 pb-6">
+              <div className="bg-gray-50 rounded-lg p-3">
                 <li
                   key={flight.flight_id}
                   className="flex justify-between gap-x-6 py-5"
                 >
                   <div className="flex min-w-0 gap-x-4">
                     <div className="min-w-0 flex-auto">
-                      <p className="text-lg font-bold leading-6 text-gray-900">
-                        {flight.flight_id}
-                      </p>
+                      <div className="flex items-center">
+                        <SiIndigo />
+                        <p className="text-sm sm:text-lg font-bold leading-6 text-gray-900 ml-2">
+                          {flight.flight_id}
+                        </p>
+                      </div>
                       <p className="text-sm leading-6 text-gray-900">
                         Arrival Gate: {flight.arrival_gate}
                       </p>
@@ -67,6 +74,17 @@ function AdminFlights() {
                         Departure Gate: {flight.departure_gate}
                       </p>
                     </div>
+                  </div>
+                  <div className="flex items-center">
+                    <p className="text-sm font-bold leading-6 text-gray-900 ml-2">
+                      {flight.source}
+                    </p>
+                    <IoAirplaneSharp className="ml-3 md:ml-5 hidden sm:block" />
+                    <HiArrowLongRight className="m-1 md:m-3" />
+                    <IoAirplaneSharp className="mr-3 md:mr-5 hidden sm:block" />
+                    <p className="text-sm font-bold leading-6 text-gray-900">
+                      {flight.destination}
+                    </p>
                   </div>
                   <div className="sm:flex sm:flex-col sm:items-end">
                     <span
@@ -76,20 +94,30 @@ function AdminFlights() {
                     >
                       {flight.status}
                     </span>
-                    <p className="text-sm leading-6 text-gray-900">
-                      {flight.actual_arrival ? (
-                        <>Arrival Time: {flight.actual_arrival}</>
-                      ) : (
-                        <>Arrival Time: {flight.scheduled_arrival}</>
-                      )}
-                    </p>
-                    <p className="text-sm leading-6 text-gray-900">
-                      {flight.actual_departure ? (
-                        <>Departure Time: {flight.actual_departure}</>
-                      ) : (
-                        <>Departure Time: {flight.scheduled_departure}</>
-                      )}
-                    </p>
+                    <div className="md:flex md:items-center">
+                      <p className="text-sm font-bold leading-6 text-gray-900">
+                        Arrival Time:
+                      </p>
+                      <p className="text-sm leading-6 text-gray-900">
+                        {flight.actual_arrival ? (
+                          <>{flight.actual_arrival}</>
+                        ) : (
+                          <>{flight.scheduled_arrival}</>
+                        )}
+                      </p>
+                    </div>
+                    <div className="md:flex md:items-center">
+                      <p className="text-sm font-bold leading-6 text-gray-900">
+                        Departure Time:
+                      </p>
+                      <p className="text-sm leading-6 text-gray-900">
+                        {flight.actual_arrival ? (
+                          <>{flight.actual_departure}</>
+                        ) : (
+                          <>{flight.scheduled_departure}</>
+                        )}
+                      </p>
+                    </div>
                   </div>
                 </li>
                 <div className="flex justify-end mb-2">
