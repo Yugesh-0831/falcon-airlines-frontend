@@ -53,6 +53,7 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
 
   // For Login Percistence ------>
   useEffect(() => {
@@ -60,11 +61,9 @@ function App() {
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       dispatch(setLoggedInUser(parsedUser));
-      console.log("parsedUser: ", parsedUser);
     }
   }, []);
 
-  const user = useSelector(selectLoggedInUser);
   useEffect(() => {
     if (user) {
       dispatch(fetchLoggedInUserAsync(user._id));
