@@ -74,20 +74,23 @@ function App() {
 
   socket.on("flight_updated", (data) => {
     dispatch(fetchAllFlightsAsync());
-    if (
-      user &&
-      user.flights.length > 0 &&
-      data &&
-      data.message &&
-      data.message.flight &&
-      user.flights.includes(data.message.flight._id)
-    ) {
-      toast.success(`${data.message.update}`, {
-        position: "top-right",
-        autoClose: false,
-        closeButton: true,
-      });
-    }
+
+    // TODO: Notifications are being sent multiple times
+
+    // if (
+    //   user &&
+    //   user.flights.length > 0 &&
+    //   data &&
+    //   data.message &&
+    //   data.message.flight &&
+    //   user.flights.includes(data.message.flight._id)
+    // ) {
+    //   toast.success(`${data.message.update}`, {
+    //     position: "top-right",
+    //     autoClose: false,
+    //     closeButton: true,
+    //   });
+    // }
   });
 
   return (
