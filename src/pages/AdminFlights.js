@@ -67,7 +67,7 @@ function AdminFlights() {
                           {flight.flight_id}
                         </p>
                       </div>
-                      <p className="text-sm leading-6 text-gray-900">
+                      <p className="text-sm leading-6 text-gray-900 mt-4">
                         Arrival Gate: {flight.arrival_gate}
                       </p>
                       <p className="text-sm leading-6 text-gray-900">
@@ -149,7 +149,6 @@ function AdminFlights() {
                       updatedFlight.status = data.status;
                       updatedFlight.updates.push({ message: data.message });
                       updatedFlight.message = data.message;
-                      console.log("updated flight :", updatedFlight);
 
                       dispatch(updateFlightScheduleAsync(updatedFlight));
                       setSelectedFlightId(null);

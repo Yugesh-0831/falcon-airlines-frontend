@@ -32,7 +32,6 @@ function Login() {
             <form
               className="px-5 py-7"
               onSubmit={handleSubmit((data) => {
-                console.log("form data: ", data);
                 dispatch(checkUserAsync(data));
               })}
             >

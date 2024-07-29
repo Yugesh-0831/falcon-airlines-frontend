@@ -13,7 +13,6 @@ export function createUser(userData) {
 export function checkUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(loginInfo);
       const responce = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         body: JSON.stringify(loginInfo),

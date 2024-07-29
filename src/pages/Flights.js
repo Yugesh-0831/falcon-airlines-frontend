@@ -36,7 +36,6 @@ function Flights() {
   };
 
   const handleBooking = (flight) => {
-    console.log(user.flights.findIndex((flightId) => flight._id === flightId));
     if (user.flights.findIndex((flightId) => flight._id === flightId) < 0) {
       const updatedUser = { ...user, flights: [...user.flights] };
       updatedUser.flights.push(flight._id);
@@ -120,7 +119,9 @@ function Flights() {
                   </div>
                 </li>
                 <div className="flex justify-end mb-2">
-                  {user.flights.includes(flight._id) ? (
+                  {user &&
+                  user.flights.length &&
+                  user.flights.includes(flight._id) ? (
                     <button className="bg-blue-900 text-white rounded-lg p-2 flex items-center">
                       <p>Booked</p>
                       <IoMdCheckmark />

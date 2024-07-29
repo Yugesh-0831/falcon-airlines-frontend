@@ -55,14 +55,14 @@ function App() {
   const dispatch = useDispatch();
 
   // For Login Percistence ------>
-  // useEffect(() => {
-  //   const storedUser = window.localStorage.getItem("USER");
-  //   if (storedUser) {
-  //     const parsedUser = JSON.parse(storedUser);
-  //     dispatch(setLoggedInUser(parsedUser));
-  //     console.log("parsedUser: ", parsedUser);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem("USER");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      dispatch(setLoggedInUser(parsedUser));
+      console.log("parsedUser: ", parsedUser);
+    }
+  }, []);
 
   const user = useSelector(selectLoggedInUser);
   useEffect(() => {
@@ -75,6 +75,20 @@ function App() {
 
   socket.on("flight_updated", (data) => {
     dispatch(fetchAllFlightsAsync());
+    if (
+      user &&
+      user.flights.length > 0 &&
+      data &&
+      data.message &&
+      data.message.flight &&
+      user.flights.includes(data.message.flight._id)
+    ) {
+      toast.success(`${data.message.update}`, {
+        position: "top-right",
+        autoClose: false,
+        closeButton: true,
+      });
+    }
   });
 
   return (
