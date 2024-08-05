@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkUserAsync, selectLoggedInUser } from "./authSlice";
 import { Link, Navigate } from "react-router-dom";
 import { SiIndigo } from "react-icons/si";
+import falconAirlines from "../../app/falcon-airlines.png";
 
 function Login() {
   const {
@@ -25,10 +26,10 @@ function Login() {
       >
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
           <div className="flex items-center justify-center m-4">
-            <SiIndigo className="text-blue-800 font-bold text-4xl m-4" />
-            <h1 className="font-bold text-2xl">Indigo</h1>
+            <img src={falconAirlines} className="h-10 w-10 rounded-lg" />
+            <h1 className="font-bold text-2xl ml-3">Falcon Airlines</h1>
           </div>
-          <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+          <div className=" bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             <form
               className="px-5 py-7"
               onSubmit={handleSubmit((data) => {

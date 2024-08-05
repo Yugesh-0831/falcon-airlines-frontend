@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectUserInfo } from "../features/user/userSlice";
 import { setLoggedInUser } from "../features/auth/authSlice";
-import { SiIndigo } from "react-icons/si";
+import falconAirlines from "../app/falcon-airlines.png";
 
 function Navbar() {
   const user = useSelector(selectUserInfo);
@@ -17,9 +17,9 @@ function Navbar() {
         <div className="flex items-center justify-between p-6">
           <Link to="/">
             <div className="flex items-center ml-5">
-              <SiIndigo className="text-white mr-3 font-bold text-2xl" />
-              <div className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Indigo
+              <img src={falconAirlines} className="h-10 w-10 rounded-lg" />
+              <div className="ml-3 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                Falcon Airlines
               </div>
             </div>
           </Link>
